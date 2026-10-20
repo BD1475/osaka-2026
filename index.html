@@ -26,6 +26,9 @@
   --red:#FF6584; --yellow:#FFE07D; --pink:#FF8FB1; --green:#7ED386;
   --road:#FFEBF0;
 }
+:root[data-char="sanrio"]{
+  --red:#FF5C8D; --pink:#FF85A9; --team2:#9B72CF;
+}
 *,*::before,*::after{box-sizing:inherit}
 [hidden]{display:none!important}
 html{scroll-padding-top:env(safe-area-inset-top,0px);color-scheme:light}
@@ -56,6 +59,8 @@ header.top{
 .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 2px 0 rgba(74,58,42,.12);transition:transform .15s,background .15s}
 .chip:hover{background:var(--yellow);color:#4A3A2A;transform:translateY(-1px)}
 .chip[aria-pressed="true"]{background:var(--red);border-color:var(--ink);color:#fff}
+.chip.sanrio-btn{background:linear-gradient(135deg,#FFE4EE 0%,#E8F3FF 100%)}
+.chip.sanrio-btn:hover{background:linear-gradient(135deg,#FFD1E2 0%,#D8EBFF 100%)}
 
 /* day tickets */
 nav.days{display:flex;gap:10px;overflow-x:auto;padding:4px 4px 14px;scrollbar-width:thin}
@@ -158,7 +163,7 @@ footer{margin-top:28px;text-align:center;font-size:13px;color:var(--ink2)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:14px;font-size:14px;font-weight:700;max-width:90vw;opacity:0;pointer-events:none;transition:opacity .25s;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .toast.show{opacity:1}
 
-/* ========== 吉依卡哇手繪攻略地圖總覽 (#poster) ========== */
+/* ========== 手繪攻略地圖總覽 (#poster) ========== */
 .poster{
   background:var(--paper);border:3px solid var(--ink);border-radius:28px;
   padding:0 0 22px;position:relative;overflow:hidden;
@@ -262,31 +267,25 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <!-- ==================== 吉依卡哇 (Chiikawa) 角色群 ==================== -->
     <!-- pal0: 吉依卡哇 (Chiikawa) - 白色圓滾滾小可愛 + 粉紅討伐棒 (Sasumata) -->
     <symbol id="pal0" viewBox="0 0 64 64">
       <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 粉紅討伐棒 Sasumata -->
         <path d="M53 48 L57 26 M53 21 Q53 27 57 27 Q61 27 61 21" fill="none" stroke="#FF8DA6" stroke-width="3"/>
         <path d="M53 48 L57 26 M53 21 Q53 27 57 27 Q61 27 61 21" fill="none" stroke="#4A3A2A" stroke-width="1.2"/>
-        <!-- 圓耳朵 -->
         <circle cx="15" cy="18" r="7" fill="#FFFFFF"/>
         <circle cx="49" cy="18" r="7" fill="#FFFFFF"/>
         <circle cx="15" cy="18" r="3.5" fill="#FFD6E0" stroke="none"/>
         <circle cx="49" cy="18" r="3.5" fill="#FFD6E0" stroke="none"/>
-        <!-- 身體與小手 -->
         <path d="M18 46 Q14 57 23 58 H41 Q50 57 46 46" fill="#FFFFFF"/>
-        <!-- 圓臉 -->
         <ellipse cx="32" cy="34" rx="22" ry="19.5" fill="#FFFFFF"/>
-        <!-- 腮紅 (帶可愛斜線) -->
         <ellipse cx="17" cy="38.5" rx="4.8" ry="2.8" fill="#FF9EB5" stroke="none"/>
         <ellipse cx="47" cy="38.5" rx="4.8" ry="2.8" fill="#FF9EB5" stroke="none"/>
-        <!-- 小八字眉與水汪汪大眼 -->
         <path d="M21 25.5 q2.5 -1.8 4.8 0 M38.2 25.5 q2.3 -1.8 4.8 0" fill="none" stroke-width="1.9"/>
         <circle cx="24" cy="32.5" r="3.2" fill="#4A3A2A" stroke="none"/>
         <circle cx="40" cy="32.5" r="3.2" fill="#4A3A2A" stroke="none"/>
         <circle cx="23" cy="31.3" r="1.2" fill="#FFFFFF" stroke="none"/>
         <circle cx="39" cy="31.3" r="1.2" fill="#FFFFFF" stroke="none"/>
-        <!-- ω 嘴巴 -->
         <path d="M29 37 q1.5 2 3 0 q1.5 2 3 0" fill="none" stroke-width="2"/>
         <path d="M30.2 38.2 Q32 42 33.8 38.2" fill="#FF8DA6" stroke-width="1.6"/>
       </g>
@@ -295,31 +294,22 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
     <!-- pal1: 小八貓 (Hachiware) - 藍色八字瀏海貓咪 + 藍色討伐棒 -->
     <symbol id="pal1" viewBox="0 0 64 64">
       <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 藍色討伐棒 Sasumata -->
         <path d="M54 48 L58 26 M54 21 Q54 27 58 27 Q62 27 62 21" fill="none" stroke="#6CAAD9" stroke-width="3"/>
         <path d="M54 48 L58 26 M54 21 Q54 27 58 27 Q62 27 62 21" fill="none" stroke="#4A3A2A" stroke-width="1.2"/>
-        <!-- 貓咪尖耳朵 -->
         <path d="M13 24 L11 8 L25 16 Z" fill="#6CAAD9"/>
         <path d="M51 24 L53 8 L39 16 Z" fill="#6CAAD9"/>
-        <!-- 身體 -->
         <path d="M18 47 Q14 57 22 58 H42 Q50 57 46 47" fill="#FFFFFF"/>
-        <!-- 圓臉 -->
         <ellipse cx="32" cy="34" rx="22" ry="19.5" fill="#FFFFFF"/>
-        <!-- 藍色八字瀏海花紋 -->
         <path d="M12.5 28 Q16 15.5 32 14.5 Q25.5 22 19 29.5 Z" fill="#6CAAD9" stroke="none"/>
         <path d="M51.5 28 Q48 15.5 32 14.5 Q38.5 22 45 29.5 Z" fill="#6CAAD9" stroke="none"/>
-        <!-- 重新描繪外框 -->
         <ellipse cx="32" cy="34" rx="22" ry="19.5" fill="none"/>
-        <!-- 腮紅 -->
         <ellipse cx="17.5" cy="38.5" rx="4.6" ry="2.6" fill="#FF9EB5" stroke="none"/>
         <ellipse cx="46.5" cy="38.5" rx="4.6" ry="2.6" fill="#FF9EB5" stroke="none"/>
-        <!-- 眉毛與眼睛 -->
         <path d="M21.5 26 q2.5 -1.8 4.5 0 M38 26 q2 -1.8 4.5 0" fill="none" stroke-width="2"/>
         <circle cx="24" cy="32.5" r="3.2" fill="#4A3A2A" stroke="none"/>
         <circle cx="40" cy="32.5" r="3.2" fill="#4A3A2A" stroke="none"/>
         <circle cx="23" cy="31.3" r="1.2" fill="#FFFFFF" stroke="none"/>
         <circle cx="39" cy="31.3" r="1.2" fill="#FFFFFF" stroke="none"/>
-        <!-- 開心開口笑 -->
         <path d="M28.5 36.5 q1.7 1.8 3.5 0 q1.8 1.8 3.5 0" fill="none" stroke-width="2.1"/>
         <path d="M29.5 37.3 Q32 42.5 34.5 37.3 Z" fill="#FF8DA6" stroke-width="1.8"/>
       </g>
@@ -328,25 +318,19 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
     <!-- pal2: 兔兔 / 烏薩奇 (Usagi) - 鵝黃色長耳兔 -->
     <symbol id="pal2" viewBox="0 0 64 64">
       <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 長兔耳 -->
         <path d="M21 20 V6.5 Q21 2 25.5 2 Q30 2 30 6.5 V19" fill="#FFF0B8"/>
         <path d="M34 19 V6.5 Q34 2 38.5 2 Q43 2 43 6.5 V20" fill="#FFF0B8"/>
         <ellipse cx="25.5" cy="11" rx="2.2" ry="5.5" fill="#FFD1DC" stroke="none"/>
         <ellipse cx="38.5" cy="11" rx="2.2" ry="5.5" fill="#FFD1DC" stroke="none"/>
-        <!-- 身體 -->
         <path d="M19 48 Q15 57 23 58 H41 Q49 57 45 48" fill="#FFF0B8"/>
-        <!-- 圓臉 -->
         <ellipse cx="32" cy="36" rx="21.5" ry="18.5" fill="#FFF0B8"/>
-        <!-- 腮紅 -->
         <ellipse cx="17.5" cy="40" rx="4.6" ry="2.7" fill="#FF9EB5" stroke="none"/>
         <ellipse cx="46.5" cy="40" rx="4.6" ry="2.7" fill="#FF9EB5" stroke="none"/>
-        <!-- 眉毛與眼睛 -->
         <path d="M21.5 28 q2.5 -2 4.5 0 M38 28 q2 -2 4.5 0" fill="none" stroke-width="2"/>
         <circle cx="24.5" cy="34" r="3" fill="#4A3A2A" stroke="none"/>
         <circle cx="39.5" cy="34" r="3" fill="#4A3A2A" stroke="none"/>
         <circle cx="23.6" cy="32.9" r="1.1" fill="#FFFFFF" stroke="none"/>
         <circle cx="38.6" cy="32.9" r="1.1" fill="#FFFFFF" stroke="none"/>
-        <!-- 兔兔招牌 Y 字嘴與元氣笑容 -->
         <path d="M29 38.5 q1.5 2 3 0 q1.5 2 3 0" fill="none" stroke-width="2.1"/>
         <path d="M30 39.5 Q32 44 34 39.5" fill="#FF7B9C" stroke-width="1.8"/>
       </g>
@@ -355,28 +339,21 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
     <!-- pal3: 小桃鼠 (Momonga) - 蓬鬆臉頰與大尾巴飛鼠 -->
     <symbol id="pal3" viewBox="0 0 64 64">
       <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 身後蓬鬆藍灰大尾巴 -->
         <path d="M44 45 Q61 36 57 20 Q53 10 43 18" fill="#9BB0C9"/>
-        <!-- 耳朵 -->
         <ellipse cx="16" cy="18" rx="6" ry="8.5" transform="rotate(-18 16 18)" fill="#FFFFFF"/>
         <ellipse cx="48" cy="18" rx="6" ry="8.5" transform="rotate(18 48 18)" fill="#FFFFFF"/>
         <ellipse cx="16" cy="18" rx="3" ry="5" transform="rotate(-18 16 18)" fill="#9BB0C9" stroke="none"/>
         <ellipse cx="48" cy="18" rx="3" ry="5" transform="rotate(18 48 18)" fill="#9BB0C9" stroke="none"/>
-        <!-- 蓬鬆臉頰輪廓 -->
         <path d="M12 31 Q6 38 12 46 Q20 54 32 54 Q44 54 52 46 Q58 38 52 31 Q50 16 32 16 Q14 16 12 31 Z" fill="#FFFFFF"/>
-        <!-- 頭頂小呆毛 -->
         <path d="M29 16 l2 -3.5 l2 3 l2 -2.5" fill="none" stroke-width="2"/>
-        <!-- 腮紅 -->
         <ellipse cx="16.5" cy="40" rx="4.8" ry="2.8" fill="#FF9EB5" stroke="none"/>
         <ellipse cx="47.5" cy="40" rx="4.8" ry="2.8" fill="#FF9EB5" stroke="none"/>
-        <!-- 閃亮超大眼睛 -->
         <circle cx="23.5" cy="33.5" r="3.8" fill="#4A3A2A" stroke="none"/>
         <circle cx="40.5" cy="33.5" r="3.8" fill="#4A3A2A" stroke="none"/>
         <circle cx="22.3" cy="32" r="1.5" fill="#FFFFFF" stroke="none"/>
         <circle cx="39.3" cy="32" r="1.5" fill="#FFFFFF" stroke="none"/>
         <circle cx="24.8" cy="35" r="0.9" fill="#FFFFFF" stroke="none"/>
         <circle cx="41.8" cy="35" r="0.9" fill="#FFFFFF" stroke="none"/>
-        <!-- 嘴巴 -->
         <path d="M29.5 39 q1.2 1.8 2.5 0 q1.3 1.8 2.5 0" fill="none" stroke-width="2"/>
       </g>
     </symbol>
@@ -384,21 +361,15 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
     <!-- pal4: 栗子饅頭 (Kurimanju) - 雙色栗子頭水獺前輩 -->
     <symbol id="pal4" viewBox="0 0 64 64">
       <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 小圓耳 -->
         <circle cx="14" cy="24" r="6" fill="#FAF0DC"/>
         <circle cx="50" cy="24" r="6" fill="#FAF0DC"/>
-        <!-- 身體 -->
         <path d="M18 47 Q14 56 22 57 H42 Q50 56 46 47" fill="#FAF0DC"/>
-        <!-- 圓臉底色 -->
         <ellipse cx="32" cy="34" rx="22" ry="19.5" fill="#FAF0DC"/>
-        <!-- 栗子棕色頭頂 -->
         <path d="M11 29 Q14 14.5 32 14.5 Q50 14.5 53 29 Q32 33 11 29 Z" fill="#9E5727" stroke="none"/>
         <ellipse cx="32" cy="34" rx="22" ry="19.5" fill="none"/>
         <path d="M11 29 Q32 33 53 29" fill="none" stroke="#9E5727" stroke-width="1.5"/>
-        <!-- 腮紅 -->
         <ellipse cx="17.5" cy="39" rx="4.5" ry="2.5" fill="#FF9EB5" stroke="none"/>
         <ellipse cx="46.5" cy="39" rx="4.5" ry="2.5" fill="#FF9EB5" stroke="none"/>
-        <!-- 眼睛與大叔哈～表情 -->
         <circle cx="24" cy="33.5" r="3" fill="#4A3A2A" stroke="none"/>
         <circle cx="40" cy="33.5" r="3" fill="#4A3A2A" stroke="none"/>
         <circle cx="23" cy="32.4" r="1.1" fill="#FFFFFF" stroke="none"/>
@@ -411,27 +382,195 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
     <!-- pal5: 獅薩 (Shisa) - 沖繩風獅爺小可愛 -->
     <symbol id="pal5" viewBox="0 0 64 64">
       <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 橘色捲捲鬃毛與耳朵 -->
         <circle cx="12" cy="32" r="7" fill="#E8833A"/>
         <circle cx="52" cy="32" r="7" fill="#E8833A"/>
         <circle cx="15" cy="20" r="6.5" fill="#E8833A"/>
         <circle cx="49" cy="20" r="6.5" fill="#E8833A"/>
-        <!-- 圓臉 -->
         <ellipse cx="32" cy="35" rx="20.5" ry="18.5" fill="#FCE592"/>
-        <!-- 招牌粗捲眉 -->
         <path d="M18 24 Q22 18 27 23 Q23 26 18 24 Z" fill="#E8833A" stroke-width="2"/>
         <path d="M46 24 Q42 18 37 23 Q41 26 46 24 Z" fill="#E8833A" stroke-width="2"/>
-        <!-- 腮紅 -->
         <ellipse cx="18" cy="40" rx="4.4" ry="2.5" fill="#FF9EB5" stroke="none"/>
         <ellipse cx="46" cy="40" rx="4.4" ry="2.5" fill="#FF9EB5" stroke="none"/>
-        <!-- 眼睛 -->
         <circle cx="24.5" cy="33.5" r="3" fill="#4A3A2A" stroke="none"/>
         <circle cx="39.5" cy="33.5" r="3" fill="#4A3A2A" stroke="none"/>
         <circle cx="23.5" cy="32.4" r="1.1" fill="#FFFFFF" stroke="none"/>
         <circle cx="38.5" cy="32.4" r="1.1" fill="#FFFFFF" stroke="none"/>
-        <!-- 獅薩開心笑容 -->
         <path d="M27 38.5 H37 Q36 44.5 32 44.5 Q28 44.5 27 38.5 Z" fill="#FF8DA6" stroke-width="2"/>
         <path d="M28.5 38.5 l1 2.2 l1 -2.2 M33.5 38.5 l1 2.2 l1 -2.2" fill="#FFFFFF" stroke-width="1.2"/>
+      </g>
+    </symbol>
+
+    <!-- ==================== 三麗鷗 (Sanrio) 角色群 ==================== -->
+    <!-- sanrio0: Hello Kitty (凱蒂貓) - 經典紅蝴蝶結、黃鼻子、三根鬍鬚 -->
+    <symbol id="sanrio0" viewBox="0 0 64 64">
+      <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 藍色小吊帶衣身體 -->
+        <path d="M19 47 Q15 57 23 58 H41 Q49 57 45 47" fill="#6CAAD9"/>
+        <path d="M25 48 H39 V54 H25 Z" fill="#FF5C8D" stroke-width="1.8"/>
+        <!-- 貓耳與圓臉一體成形 -->
+        <path d="M12 27 L11 11 L25 17 Q32 15.5 39 17 L53 11 L52 27 Q56 35 51 44 Q44 51 32 51 Q20 51 13 44 Q8 35 12 27 Z" fill="#FFFFFF"/>
+        <!-- 腮紅 -->
+        <ellipse cx="18" cy="39.5" rx="4.2" ry="2.4" fill="#FFB3C6" stroke="none"/>
+        <ellipse cx="46" cy="39.5" rx="4.2" ry="2.4" fill="#FFB3C6" stroke="none"/>
+        <!-- 招牌橢圓黑眼睛與黃色鼻子 -->
+        <ellipse cx="22.5" cy="35" rx="2.4" ry="3.3" fill="#4A3A2A" stroke="none"/>
+        <ellipse cx="41.5" cy="35" rx="2.4" ry="3.3" fill="#4A3A2A" stroke="none"/>
+        <ellipse cx="32" cy="38.5" rx="3.3" ry="2.4" fill="#FFD95A" stroke-width="2"/>
+        <!-- 左右各三根貓鬍鬚 -->
+        <path d="M13 32 L6 30 M12 36.5 L5 36.5 M13 41 L6 43" fill="none" stroke-width="2.2"/>
+        <path d="M51 32 L58 30 M52 36.5 L59 36.5 M51 41 L58 43" fill="none" stroke-width="2.2"/>
+        <!-- 右耳上的招牌紅色蝴蝶結 -->
+        <g transform="translate(45,19) rotate(16)">
+          <path d="M-3 0 C-13 -9 -14 9 -3 2 Z" fill="#FF4D6D"/>
+          <path d="M3 0 C13 -9 14 9 3 2 Z" fill="#FF4D6D"/>
+          <circle cx="0" cy="1" r="4" fill="#FF4D6D"/>
+        </g>
+      </g>
+    </symbol>
+
+    <!-- sanrio1: Cinnamoroll (大耳狗喜拿) - 軟綿綿長垂耳、天藍大眼、肉桂捲尾巴 -->
+    <symbol id="sanrio1" viewBox="0 0 64 64">
+      <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 肉桂捲小尾巴 -->
+        <circle cx="48" cy="51" r="6" fill="#FFFFFF"/>
+        <path d="M48 51 m-2.5 0 a2.5 2.5 0 1 0 5 0 a1.5 1.5 0 1 0 -3 0" fill="none" stroke-width="1.6"/>
+        <!-- 身體 -->
+        <path d="M21 45 Q17 56 24 57 H40 Q47 56 43 45" fill="#FFFFFF"/>
+        <!-- 寬長下垂大耳朵 -->
+        <path d="M15 26 C2 26 1 46 11 48 C18 49 20 39 17 33 Z" fill="#FFFFFF"/>
+        <path d="M49 26 C62 26 63 46 53 48 C46 49 44 39 47 33 Z" fill="#FFFFFF"/>
+        <!-- 白胖圓臉 -->
+        <ellipse cx="32" cy="34" rx="19.5" ry="15.5" fill="#FFFFFF"/>
+        <!-- 頭頂可愛淺藍小紳士帽 -->
+        <ellipse cx="32" cy="17.5" rx="8.5" ry="2.8" fill="#89CFF0"/>
+        <path d="M26.5 17.5 L28 11.5 H36 L37.5 17.5 Z" fill="#89CFF0"/>
+        <!-- 腮紅 -->
+        <ellipse cx="19.5" cy="37.5" rx="4.5" ry="2.6" fill="#FF9EB5" stroke="none"/>
+        <ellipse cx="44.5" cy="37.5" rx="4.5" ry="2.6" fill="#FF9EB5" stroke="none"/>
+        <!-- 水藍色大眼睛 -->
+        <ellipse cx="23.5" cy="33.5" rx="2.6" ry="3.5" fill="#4BA3E3" stroke="none"/>
+        <ellipse cx="40.5" cy="33.5" rx="2.6" ry="3.5" fill="#4BA3E3" stroke="none"/>
+        <circle cx="22.8" cy="32" r="1.1" fill="#FFFFFF" stroke="none"/>
+        <circle cx="39.8" cy="32" r="1.1" fill="#FFFFFF" stroke="none"/>
+        <!-- ω 微笑嘴巴 -->
+        <path d="M29 36.5 q1.5 2.2 3 0 q1.5 2.2 3 0" fill="none" stroke-width="2"/>
+      </g>
+    </symbol>
+
+    <!-- sanrio2: My Melody (美樂蒂) - 粉紅兔耳頭巾與小白花 -->
+    <symbol id="sanrio2" viewBox="0 0 64 64">
+      <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 身體 -->
+        <path d="M19 47 Q15 57 23 58 H41 Q49 57 45 47" fill="#FFFFFF"/>
+        <!-- 粉紅頭巾與長兔耳 -->
+        <path d="M19 21 V7.5 Q19 2 24.5 2 Q30 2 30 7.5 V19" fill="#FF85A9"/>
+        <path d="M34 19 V7.5 Q34 2 40 4 Q45 6 43 13 L41 21" fill="#FF85A9"/>
+        <!-- 粉紅頭巾包覆頭部 -->
+        <ellipse cx="32" cy="35" rx="22" ry="18.5" fill="#FF85A9"/>
+        <!-- 白色內臉蛋 -->
+        <ellipse cx="32" cy="37.5" rx="16.5" ry="13" fill="#FFFFFF"/>
+        <!-- 頭巾領口小蝴蝶結 -->
+        <path d="M28 50 L32 52 L28 54 Z M36 50 L32 52 L36 54 Z" fill="#FF5C8D" stroke-width="1.8"/>
+        <circle cx="32" cy="52" r="2" fill="#FFD95A" stroke-width="1.8"/>
+        <!-- 耳朵上的白色五瓣花 -->
+        <g transform="translate(42,20)">
+          <circle cx="0" cy="-4.2" r="3.4" fill="#FFFFFF"/>
+          <circle cx="4" cy="-1.2" r="3.4" fill="#FFFFFF"/>
+          <circle cx="2.5" cy="3.6" r="3.4" fill="#FFFFFF"/>
+          <circle cx="-2.5" cy="3.6" r="3.4" fill="#FFFFFF"/>
+          <circle cx="-4" cy="-1.2" r="3.4" fill="#FFFFFF"/>
+          <circle cx="0" cy="0" r="2.8" fill="#FFD95A"/>
+        </g>
+        <!-- 腮紅、眼睛、黃鼻子與微笑 -->
+        <ellipse cx="20.5" cy="40" rx="3.8" ry="2.2" fill="#FFB3C6" stroke="none"/>
+        <ellipse cx="43.5" cy="40" rx="3.8" ry="2.2" fill="#FFB3C6" stroke="none"/>
+        <ellipse cx="24" cy="36.5" rx="2.2" ry="3" fill="#4A3A2A" stroke="none"/>
+        <ellipse cx="40" cy="36.5" rx="2.2" ry="3" fill="#4A3A2A" stroke="none"/>
+        <ellipse cx="32" cy="39" rx="2.6" ry="1.9" fill="#FFD95A" stroke-width="1.8"/>
+        <path d="M30 42.5 q2 1.8 4 0" fill="none" stroke-width="1.9"/>
+      </g>
+    </symbol>
+
+    <!-- sanrio3: Kuromi (酷洛米) - 黑色小惡魔尖耳頭巾 + 粉紅骷髏頭標誌 -->
+    <symbol id="sanrio3" viewBox="0 0 64 64">
+      <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 小惡魔箭頭尾巴 -->
+        <path d="M44 50 Q55 48 56 39" fill="none" stroke-width="2.5"/>
+        <path d="M53 39 L57 35 L59 40 Z" fill="#4A3D54"/>
+        <!-- 身體 -->
+        <path d="M19 47 Q15 57 23 58 H41 Q49 57 45 47" fill="#FFFFFF"/>
+        <!-- 酷洛米黑色尖耳頭巾與頂端粉紅球球 -->
+        <path d="M16 25 L8 6 L27 18 L32 17 L37 18 L56 6 L48 25 Q55 34 50 45 Q43 52 32 52 Q21 52 14 45 Q9 34 16 25 Z" fill="#4A3D54"/>
+        <circle cx="8" cy="6" r="3.2" fill="#FF85A9"/>
+        <circle cx="56" cy="6" r="3.2" fill="#FF85A9"/>
+        <!-- 白色內臉 (額頭V字剪裁) -->
+        <path d="M16 38 Q16 28 25 27 L32 31 L39 27 Q48 28 48 38 Q48 49 32 49 Q16 49 16 38 Z" fill="#FFFFFF"/>
+        <!-- 額頭粉紅小骷髏 -->
+        <ellipse cx="32" cy="22" rx="4.8" ry="3.8" fill="#FF9EB5" stroke-width="1.8"/>
+        <rect x="29.5" y="24.5" width="5" height="2.5" fill="#FF9EB5" stroke-width="1.5"/>
+        <circle cx="30.4" cy="22" r="1.1" fill="#4A3D54" stroke="none"/>
+        <circle cx="33.6" cy="22" r="1.1" fill="#4A3D54" stroke="none"/>
+        <!-- 腮紅與傲嬌可愛眼神 -->
+        <ellipse cx="21" cy="41.5" rx="3.8" ry="2.2" fill="#FFB3C6" stroke="none"/>
+        <ellipse cx="43" cy="41.5" rx="3.8" ry="2.2" fill="#FFB3C6" stroke="none"/>
+        <ellipse cx="24.5" cy="37.5" rx="2.3" ry="3" fill="#4A3A2A" stroke="none"/>
+        <ellipse cx="39.5" cy="37.5" rx="2.3" ry="3" fill="#4A3A2A" stroke="none"/>
+        <circle cx="23.8" cy="36.3" r="1" fill="#FFFFFF" stroke="none"/>
+        <circle cx="38.8" cy="36.3" r="1" fill="#FFFFFF" stroke="none"/>
+        <ellipse cx="32" cy="40" rx="2.2" ry="1.6" fill="#FF85A9" stroke="none"/>
+        <!-- 俏皮小虎牙笑 -->
+        <path d="M28.5 43.2 Q32 45.8 35.5 43.2" fill="none" stroke-width="2"/>
+      </g>
+    </symbol>
+
+    <!-- sanrio4: Pompompurin (布丁狗) - 焦糖咖啡貝雷帽 + 布丁黃圓滾滾黃金獵犬 -->
+    <symbol id="sanrio4" viewBox="0 0 64 64">
+      <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 身體 -->
+        <path d="M18 46 Q14 57 23 58 H41 Q50 57 46 46" fill="#FFE885"/>
+        <!-- 垂耳 -->
+        <path d="M14 25 C5 27 5 44 13 45 C18 46 19 36 16 29 Z" fill="#FFE885"/>
+        <path d="M50 25 C59 27 59 44 51 45 C46 46 45 36 48 29 Z" fill="#FFE885"/>
+        <!-- 布丁圓臉 -->
+        <ellipse cx="32" cy="35" rx="20.5" ry="17.5" fill="#FFE885"/>
+        <!-- 招牌焦糖棕色貝雷帽 -->
+        <ellipse cx="32" cy="17.5" rx="13.5" ry="5.5" fill="#8C4A27"/>
+        <path d="M32 12 V9.5" stroke="#8C4A27" stroke-width="3"/>
+        <path d="M32 12 V9.5" stroke="#4A3A2A" stroke-width="2"/>
+        <!-- 腮紅 -->
+        <ellipse cx="19" cy="38.5" rx="4.2" ry="2.4" fill="#FF9EB5" stroke="none"/>
+        <ellipse cx="45" cy="38.5" rx="4.2" ry="2.4" fill="#FF9EB5" stroke="none"/>
+        <!-- 豆豆眼與三葉草小嘴 (鼻子+ω嘴) -->
+        <circle cx="24" cy="34" r="2.6" fill="#4A3A2A" stroke="none"/>
+        <circle cx="40" cy="34" r="2.6" fill="#4A3A2A" stroke="none"/>
+        <ellipse cx="32" cy="36.5" rx="2.2" ry="1.6" fill="#6E3B1E" stroke="none"/>
+        <path d="M32 37.5 V39.5 M27.5 39.5 Q29.8 42.5 32 39.5 Q34.2 42.5 36.5 39.5" fill="none" stroke-width="2"/>
+      </g>
+    </symbol>
+
+    <!-- sanrio5: Hangyodon (人魚漢頓) - 湖水綠呆萌半魚人、頭頂魚鰭、粉紅厚唇 -->
+    <symbol id="sanrio5" viewBox="0 0 64 64">
+      <g stroke="#4A3A2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 身體 -->
+        <path d="M19 47 Q15 57 23 58 H41 Q49 57 45 47" fill="#5BC8D4"/>
+        <!-- 頭頂三瓣魚鰭 -->
+        <path d="M27 17 Q27 8 30 11 Q32 6 34 11 Q37 8 37 17 Z" fill="#3BA1B0"/>
+        <!-- 左右魚鰭耳朵 -->
+        <path d="M12 31 Q4 26 6 35 Q5 41 13 39 Z" fill="#F4A2B8"/>
+        <path d="M52 31 Q60 26 58 35 Q59 41 51 39 Z" fill="#F4A2B8"/>
+        <!-- 湖水藍圓臉 -->
+        <ellipse cx="32" cy="35" rx="20" ry="18" fill="#5BC8D4"/>
+        <!-- 大白眼珠 -->
+        <circle cx="25" cy="30.5" r="5.5" fill="#FFFFFF"/>
+        <circle cx="39" cy="30.5" r="5.5" fill="#FFFFFF"/>
+        <circle cx="25.5" cy="30.5" r="2.3" fill="#4A3A2A" stroke="none"/>
+        <circle cx="38.5" cy="30.5" r="2.3" fill="#4A3A2A" stroke="none"/>
+        <!-- 腮紅 -->
+        <ellipse cx="17.5" cy="37.5" rx="3.8" ry="2.2" fill="#FF9EB5" stroke="none"/>
+        <ellipse cx="46.5" cy="37.5" rx="3.8" ry="2.2" fill="#FF9EB5" stroke="none"/>
+        <!-- 招牌粉紅嘟嘟嘴唇 -->
+        <ellipse cx="32" cy="41.5" rx="7.5" ry="4.2" fill="#FF9EB5"/>
+        <path d="M26 41.5 H38" fill="none" stroke-width="1.9"/>
       </g>
     </symbol>
   </defs>
@@ -440,17 +579,18 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 <div class="wrap">
   <header class="top">
     <div class="title">
-      <div class="title-mascots" aria-hidden="true">
+      <div class="title-mascots" id="titleMascots" aria-hidden="true">
         <svg viewBox="0 0 64 64"><use href="#pal0"/></svg>
         <svg viewBox="0 0 64 64"><use href="#pal1"/></svg>
         <svg viewBox="0 0 64 64"><use href="#pal2"/></svg>
       </div>
       <div>
         <h1>2026 凱信大阪 散步帖</h1>
-        <p>10/29（四）– 11/03（二）・吉依卡哇與夥伴們陪你走完每一天 ✨</p>
+        <p id="headerSub">10/29（四）– 11/03（二）・吉依卡哇與夥伴們陪你走完每一天 ✨</p>
       </div>
     </div>
     <div class="top-actions">
+      <button class="chip sanrio-btn" id="charBtn" type="button" aria-pressed="false">🎀 切換三麗鷗版</button>
       <button class="chip" id="themeBtn" type="button">🌸 切換櫻花粉嫩</button>
       <button class="chip" id="liveBtn" type="button" aria-pressed="false">🕒 對照日本現在時間</button>
     </div>
@@ -460,13 +600,13 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
 
   <section class="poster" id="poster" hidden aria-label="六日攻略地圖總覽">
     <div class="poster-banner">
-      <h2 class="poster-title">✨ 吉依卡哇帶你遊！大阪六日秋日攻略地圖 <small>(2026年10月29日 - 11月3日)</small> ✨</h2>
+      <h2 class="poster-title" id="posterTitle">✨ 吉依卡哇帶你遊！大阪六日秋日攻略地圖 <small>(2026年10月29日 - 11月3日)</small> ✨</h2>
     </div>
     <div class="poster-scroll"><div class="poster-grid" id="pgrid"></div></div>
     <div class="poster-footer">
-      <div class="poster-hint">🐾 點擊任一景點插畫，即可跳轉至該日互動散步地圖與時間軸！</div>
+      <div class="poster-hint" id="posterHint">🐾 點擊任一景點插畫，即可跳轉至該日互動散步地圖與時間軸！</div>
       <div class="tips-wrap">
-        <div class="tips-mascots" aria-hidden="true">
+        <div class="tips-mascots" id="tipsMascots" aria-hidden="true">
           <svg viewBox="0 0 64 64"><use href="#pal1"/></svg>
           <svg viewBox="0 0 64 64"><use href="#pal0"/></svg>
         </div>
@@ -496,21 +636,27 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
         </div>
       </div>
       <div class="pals" id="pals"></div>
-      <div class="scale-note">✦ 地圖為吉依卡哇手帳示意插畫，比例非實際距離；遠距離路段旁標示實際公里數。</div>
+      <div class="scale-note" id="scaleNote">✦ 地圖為吉依卡哇手帳示意插畫，比例非實際距離；遠距離路段旁標示實際公里數。</div>
     </section>
     <section aria-label="當日行程">
       <ol class="stops" id="stops"></ol>
     </section>
   </main>
-  <footer>✨ 吉依卡哇主題手帳版・地點座標為示意位置，出發前請以 Google 地圖連結為準 ✨</footer>
+  <footer id="footerNote">✨ 吉依卡哇主題手帳版・地點座標為示意位置，出發前請以 Google 地圖連結為準 ✨</footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-const PALS=[
+const CHIIKAWA_PALS=[
   {id:"pal0",name:"吉依卡哇"},{id:"pal1",name:"小八貓"},{id:"pal2",name:"兔兔"},
   {id:"pal3",name:"小桃鼠"},{id:"pal4",name:"栗子饅頭"},{id:"pal5",name:"獅薩"}
 ];
+const SANRIO_PALS=[
+  {id:"sanrio0",name:"Hello Kitty"},{id:"sanrio1",name:"大耳狗喜拿"},{id:"sanrio2",name:"美樂蒂"},
+  {id:"sanrio3",name:"酷洛米"},{id:"sanrio4",name:"布丁狗"},{id:"sanrio5",name:"人魚漢頓"}
+];
+let charMode="chiikawa";
+let PALS=CHIIKAWA_PALS;
 
 /* ---------- 手繪風示意插畫小物 ---------- */
 const DOODLE={
@@ -652,7 +798,7 @@ const DAYS=[
    {t:"08:30",icon:"🏨",name:"飯店出發",short:"飯店",p:[530,420]},
    {t:"09:00",icon:"🐧",name:"唐吉訶德",short:"唐吉訶德",p:[300,330],travel:10,mode:"步行"},
    {t:"12:00",icon:"🍜",name:"午餐：Nishiya 烏龍麵",short:"Nishiya",p:[560,130],travel:15,mode:"步行",cost:2000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/QAAib3xZiaHQgjHQ7"},
-   {t:"12:30",icon:"🦀",name:"黒門市場",short:"黒門市場",p:[780,370],travel:15,mode:"步行"},
+   {t:"12:00",icon:"🦀",name:"黒門市場",short:"黒門市場",p:[780,370],travel:15,mode:"步行"},
    {t:"13:30",icon:"🎌",name:"梅田 / 電器街",short:"電器街",p:[780,590],travel:10,mode:"步行",note:"DIY 食物模型 Design Pocket・紅豆麻糬 玉製家和菓子"},
    {t:"15:30",icon:"🎰",name:"柏青哥",short:"柏青哥",p:[520,600],travel:15,mode:"步行",cost:5000},
    {t:"19:30",icon:"🍲",name:"晚餐：しゃぶ長 Shabucho",short:"しゃぶ長",p:[230,480],travel:12,mode:"步行",cost:8000,tags:[{t:"已訂位"}]}
@@ -687,6 +833,8 @@ const DAYS=[
    {t:"16:00",team:"B",icon:"✈️",name:"前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,mode:"包車",km:50}
   ]}
 ];
+// 修正 Day3 黒門市場時間為 12:30
+DAYS[2].stops[3].t="12:30";
 
 const W=1000,H=680;
 const $=s=>document.getElementById(s);
@@ -742,10 +890,12 @@ function renderTabs(){
   const nav=$("days");nav.innerHTML="";
   const today=tokyoNow().date;
   const all=document.createElement("button");all.type="button";all.className="ticket";all.id="tabAll";all.setAttribute("role","tab");
-  all.innerHTML="<b>🗺️ 總覽</b><span>吉依卡哇六日地圖</span>";all.onclick=showPoster;nav.appendChild(all);
+  all.setAttribute("aria-selected",posterOn?"true":"false");
+  const labelTitle = charMode==="sanrio" ? "三麗鷗六日地圖" : "吉依卡哇六日地圖";
+  all.innerHTML=`<b>🗺️ 總覽</b><span>${labelTitle}</span>`;all.onclick=showPoster;nav.appendChild(all);
   DAYS.forEach((d,i)=>{
     const b=document.createElement("button");b.type="button";b.className="ticket";b.setAttribute("role","tab");
-    b.setAttribute("aria-selected",i===dayIdx);b.id="tab"+i;
+    b.setAttribute("aria-selected",(!posterOn && i===dayIdx)?"true":"false");b.id="tab"+i;
     const [,mo,da]=d.date.split("-");
     b.innerHTML=`<b><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#${PALS[i%6].id}"/></svg>Day ${i+1}</b><span>${+mo}/${+da}（${d.wd}）${d.area.split(" ")[0]}</span>`+(d.date===today?`<i class="today">今天</i>`:"");
     b.onclick=()=>{setLive(false);selectDay(i)};
@@ -753,12 +903,23 @@ function renderTabs(){
   });
 }
 
+function renderDayHead(d,i){
+  $("dayHead").innerHTML=`<h2><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#${PALS[i%6].id}"/></svg>Day ${i+1}：${d.title}</h2><span class="meta">${d.date.replaceAll("-","/")}（${d.wd}）・${d.area}</span><span class="budget">當日合計 ${yen(d.total)}</span>`;
+}
+
+function renderPalsBar(d){
+  const chip=pi=>`<span class="pal-chip"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#${PALS[pi].id}"/></svg>${PALS[pi].name}</span>`;
+  $("pals").innerHTML=d.teams
+    ? d._teams.map(tm=>`<span class="team-tag${tm.ti?" t1":""}">${tm.name}</span>${tm.pals.map(chip).join("")}`).join("<span style='width:12px'></span>")
+    : "<b>今日同行夥伴：</b>"+PALS.map((_,i)=>chip(i)).join("");
+}
+
 function selectDay(i,keepTime){
   dayIdx=i;pause();posterOn=false;$("poster").hidden=true;$("page").hidden=false;
   document.querySelectorAll(".ticket").forEach(t=>t.setAttribute("aria-selected",t.id==="tab"+i?"true":"false"));
   const d=DAYS[i]; if(!d._nodes) layout(d);
   if(!keepTime) cur=d.stops[0].m;
-  $("dayHead").innerHTML=`<h2><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#${PALS[i%6].id}"/></svg>Day ${i+1}：${d.title}</h2><span class="meta">${d.date.replaceAll("-","/")}（${d.wd}）・${d.area}</span><span class="budget">當日合計 ${yen(d.total)}</span>`;
+  renderDayHead(d,i);
   renderMap(d,i);renderList(d);
   const sl=$("slider");sl.min=d._start;sl.max=d._end;sl.value=cur;
   update();
@@ -800,7 +961,7 @@ function renderMap(d,i){
   palEls=[];
   d._teams.forEach(tm=>tm.pals.forEach((pi,k)=>{
     const u=el("use",{href:"#"+PALS[pi].id,width:50,height:50,x:-25,y:-44},svg);
-    palEls.push({u,tm,k,n:tm.pals.length});
+    palEls.push({u,tm,k,n:tm.pals.length,pi});
   }));
 }
 
@@ -825,10 +986,7 @@ function renderList(d){
   });
   if(d.links){const li=document.createElement("li");li.className="stop empty-row";
     li.innerHTML=`<div class="t"></div><div><div class="card">${d.links.map(l=>`<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join(" ")}</div></div>`;ol.appendChild(li)}
-  const chip=pi=>`<span class="pal-chip"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#${PALS[pi].id}"/></svg>${PALS[pi].name}</span>`;
-  $("pals").innerHTML=d.teams
-    ? d._teams.map(tm=>`<span class="team-tag${tm.ti?" t1":""}">${tm.name}</span>${tm.pals.map(chip).join("")}`).join("<span style='width:12px'></span>")
-    : "<b>今日同行夥伴：</b>"+PALS.map((_,i)=>chip(i)).join("");
+  renderPalsBar(d);
 }
 
 function update(now=performance.now()){
@@ -904,6 +1062,56 @@ function setLive(on){
   }
 }
 $("liveBtn").onclick=()=>setLive(!live);
+
+/* ---------- 角色版本切換（吉依卡哇 ⇄ 三麗鷗） ---------- */
+function applyCharMode(mode){
+  charMode=mode;
+  PALS=mode==="sanrio"?SANRIO_PALS:CHIIKAWA_PALS;
+  const root=document.documentElement;
+  if(mode==="sanrio"){
+    root.setAttribute("data-char","sanrio");
+    $("charBtn").textContent="🐾 切換吉依卡哇版";
+    $("charBtn").setAttribute("aria-pressed","true");
+    $("headerSub").textContent="10/29（四）– 11/03（二）・三麗鷗大明星陪你走完每一天 🎀";
+    $("posterTitle").innerHTML=`🎀 三麗鷗明星帶你遊！大阪六日秋日攻略地圖 <small>(2026年10月29日 - 11月3日)</small> 🎀`;
+    $("posterHint").textContent="🎀 點擊任一景點插畫，即可跳轉至該日互動散步地圖與時間軸！";
+    $("scaleNote").textContent="✦ 地圖為三麗鷗手帳示意插畫，比例非實際距離；遠距離路段旁標示實際公里數。";
+    $("footerNote").textContent="🎀 三麗鷗大明星主題手帳版・地點座標為示意位置，出發前請以 Google 地圖連結為準 🎀";
+  }else{
+    root.removeAttribute("data-char");
+    $("charBtn").textContent="🎀 切換三麗鷗版";
+    $("charBtn").setAttribute("aria-pressed","false");
+    $("headerSub").textContent="10/29（四）– 11/03（二）・吉依卡哇與夥伴們陪你走完每一天 ✨";
+    $("posterTitle").innerHTML=`✨ 吉依卡哇帶你遊！大阪六日秋日攻略地圖 <small>(2026年10月29日 - 11月3日)</small> ✨`;
+    $("posterHint").textContent="🐾 點擊任一景點插畫，即可跳轉至該日互動散步地圖與時間軸！";
+    $("scaleNote").textContent="✦ 地圖為吉依卡哇手帳示意插畫，比例非實際距離；遠距離路段旁標示實際公里數。";
+    $("footerNote").textContent="✨ 吉依卡哇主題手帳版・地點座標為示意位置，出發前請以 Google 地圖連結為準 ✨";
+  }
+  // 更新頂部三隻代表吉祥物與右下貼心提醒吉祥物
+  $("titleMascots").innerHTML=[0,1,2].map(i=>`<svg viewBox="0 0 64 64"><use href="#${PALS[i].id}"/></svg>`).join("");
+  $("tipsMascots").innerHTML=[1,0].map(i=>`<svg viewBox="0 0 64 64"><use href="#${PALS[i].id}"/></svg>`).join("");
+
+  // 重新渲染頁籤、總覽海報、當日標題、地圖小人與下方夥伴標籤
+  renderTabs();
+  renderPoster();
+  const d=DAYS[dayIdx];
+  if(d&&d._nodes){
+    renderDayHead(d,dayIdx);
+    renderPalsBar(d);
+    palEls.forEach(item=>{
+      item.u.setAttribute("href","#"+PALS[item.pi].id);
+    });
+  }
+}
+
+$("charBtn").onclick=()=>{
+  const next=charMode==="chiikawa"?"sanrio":"chiikawa";
+  applyCharMode(next);
+  toast(next==="sanrio"
+    ? "🎀 已切換為「三麗鷗大明星版」（Hello Kitty・大耳狗・美樂蒂・酷洛米・布丁狗・人魚漢頓）！"
+    : "🐾 已切換回「吉依卡哇版」（吉依卡哇・小八貓・兔兔・小桃鼠・栗子饅頭・獅薩）！");
+};
+
 $("themeBtn").onclick=()=>{
   const root=document.documentElement;
   const isPink=root.getAttribute("data-theme")==="pink";
@@ -919,7 +1127,7 @@ $("themeBtn").onclick=()=>{
 };
 let toastT;function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove("show"),3800)}
 
-/* ---------- 吉依卡哇攻略地圖總覽 ---------- */
+/* ---------- 攻略地圖總覽 ---------- */
 const ART={"✈️":"plane","⛩️":"torii","🏯":"pagoda","🎢":"coaster","🛍️":"bag","🍢":"tower","🏨":"hotel","🚐":"bus","🦀":null};
 const BLOBS=["var(--blob1)","var(--blob2)","var(--blob3)","var(--blob4)"];
 const DAYTITLE=["抵達與心齋橋逛街","USJ・梅田分頭玩","難波電器街掃貨","神戶牛與通天閣","京都稻荷・清水寺","蟹道樂與返台"];
