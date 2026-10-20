@@ -453,7 +453,6 @@ svg.plinks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;
     <div class="top-actions">
       <button class="chip" id="themeBtn" type="button">🌸 切換櫻花粉嫩</button>
       <button class="chip" id="liveBtn" type="button" aria-pressed="false">🕒 對照日本現在時間</button>
-      <a class="chip" href="https://app.notion.com/p/3b0674114c9c806da740f12efd9630bf?source=copy_link" target="_blank" rel="noopener">📖 中文菜單</a>
     </div>
   </header>
 
@@ -662,7 +661,7 @@ const DAYS=[
   stops:[
    {t:"08:00",icon:"🏨",name:"飯店出發",short:"飯店",p:[850,420]},
    {t:"09:00",icon:"⛩️",name:"生田神社",short:"生田神社",p:[130,300],travel:55,mode:"電車",km:32},
-   {t:"11:30",icon:"🐂",name:"午餐：神戶牛 Kobe Beef Steak Ishida.",sub:"生田新道店 / 本店",short:"神戶牛 Ishida",p:[330,220],travel:10,mode:"步行",cost:10000,note:"本店 3 人 / 分店 6 人",map:"https://maps.app.goo.gl/4Kpe8erkdVPu8nEm7"},
+   {t:"11:30",icon:"🐂",name:"午餐：神戶牛 Kobe Beef Steak Ishida.",sub:"生田新道店 / 本店",short:"神戶牛 Ishida",p:[330,220],travel:10,mode:"步行",cost:10000,note:"本店 3 人 / 分店 6 人",maps:[{label:"📍 本店 地圖",url:"https://maps.app.goo.gl/R9PqqTCzFkKYihdW7"},{label:"📍 生田新道店 地圖",url:"https://maps.app.goo.gl/4Kpe8erkdVPu8nEm7"}]},
    {t:"13:00",icon:"🛍️",name:"神戶三宮中心街",sub:"Sannomiya Center Gai Shopping Street",short:"三宮中心街",p:[380,370],travel:10,mode:"步行",note:"逛街",map:"https://maps.app.goo.gl/N5szNKHHGT5mdeq79"},
    {t:"14:30",icon:"☕",name:"沒行程",short:"自由時間"},
    {t:"17:00",icon:"🍣",name:"晚餐：すし酒場 さしす",sub:"Sushi Sakaba Sashisu",short:"さしす",p:[170,420],travel:12,mode:"步行",cost:3000,note:"不要吃太飽，等等吃炸串"},
@@ -680,10 +679,12 @@ const DAYS=[
   ],
   links:[{label:"▶ 參考影片",url:"https://www.youtube.com/watch?v=7-fQg8mWILE&t"}]},
  {date:"2026-11-03",wd:"二",title:"回家",area:"道頓堀 → 關西機場",total:10000,
+  teams:[{id:"A",name:"✈️ 直接機場組（5 人）",pals:[0,1,2]},{id:"B",name:"🦀 蟹道樂組",pals:[3,4,5]}],
   stops:[
    {t:"10:00",icon:"🏨",name:"飯店 Check-out",short:"Check-out",p:[640,190]},
-   {t:"12:00",icon:"🦀",name:"午餐：蟹道樂 道頓堀東店",sub:"Kani Doraku Dotonbori East",short:"蟹道樂",p:[820,330],travel:10,mode:"步行",cost:10000,map:"https://maps.app.goo.gl/794bmZbScFL63hdPA"},
-   {t:"16:00",icon:"✈️",name:"前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,mode:"包車",km:50}
+   {t:"10:30",team:"A",icon:"✈️",name:"直接前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,km:50,note:"Check-out 後直接出發"},
+   {t:"12:00",team:"B",icon:"🦀",name:"午餐：蟹道樂 道頓堀東店",sub:"Kani Doraku Dotonbori East",short:"蟹道樂",p:[820,330],travel:10,mode:"步行",cost:10000,map:"https://maps.app.goo.gl/794bmZbScFL63hdPA"},
+   {t:"16:00",team:"B",icon:"✈️",name:"前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,mode:"包車",km:50}
   ]}
 ];
 
@@ -815,7 +816,7 @@ function renderList(d){
       <div class="name"><span aria-hidden="true">${s.icon}</span><span>${s.name}</span></div>
       ${sub?`<div class="sub">${sub}</div>`:""}
       ${s.note?`<div class="note">${s.note}</div>`:""}${tags}
-      ${s.map?`<div class="links"><a href="${s.map}" target="_blank" rel="noopener">📍 Google 地圖</a></div>`:""}
+      ${s.maps?`<div class="links">${s.maps.map(m=>`<a href="${m.url}" target="_blank" rel="noopener">${m.label}</a>`).join(" ")}</div>`:s.map?`<div class="links"><a href="${s.map}" target="_blank" rel="noopener">📍 Google 地圖</a></div>`:""}
     </div></div>`;
     const card=li.querySelector(".card");
     const go=e=>{if(e.target.closest("a"))return;setLive(false);pause();cur=s.m;update()};
