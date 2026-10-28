@@ -122,11 +122,12 @@ ol.stops::before{content:"";position:absolute;left:60px;top:12px;bottom:12px;bor
 .stop.now .card .note,.stop.now .card .sub{color:#4A3A2A}
 .card .name{font-size:16px;font-weight:700;display:flex;gap:8px;align-items:flex-start}
 .card .sub{font-size:13px;color:var(--ink2);margin-top:2px}
-.card .note{font-size:13px;color:var(--ink2);margin-top:4px;white-space:pre-line}
+.card .note{font-size:13px;color:var(--ink2);margin-top:4px;white-space:pre-line} 
 .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;margin:5px 4px 0 0;border:1.5px solid var(--ink);background:var(--blob1)}
 .tag.hot{background:var(--red);color:#fff;border-color:var(--ink)}
 .links{margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
 .links a{font-size:13px;font-weight:700;text-decoration:none;border-bottom:2px solid var(--pink)}
+.links.stack{flex-direction:column;align-items:flex-start;gap:6px}
 .empty-row .card{border-style:dashed;cursor:default;background:var(--paper)}
 
 /* svg map */
@@ -534,7 +535,7 @@ const DAYS=[
    {t:"09:00",icon:"🐧",name:"唐吉訶德",short:"唐吉訶德",p:[300,330],travel:10,mode:"步行",map:"https://maps.app.goo.gl/autfdXTrHsR8SfSD7"},
    {t:"12:00",icon:"🍜",name:"午餐：Nishiya 烏龍麵",short:"Nishiya",p:[560,130],travel:15,mode:"步行",cost:2000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/QAAib3xZiaHQgjHQ7"},
    {t:"12:30",icon:"🦀",name:"黒門市場",short:"黒門市場",p:[780,370],travel:15,mode:"步行",map:"https://www.google.com/maps/search/?api=1&query=黒門市場"},
-   {t:"13:30",icon:"🎌",name:"梅田 / 電器街",short:"電器街",p:[780,590],travel:10,mode:"步行",note:"DIY 食物模型 Design Pocket\n紅豆麻糬 玉製家和菓子",maps:[{label:"📍 電器街",url:"https://www.google.com/maps/search/?api=1&query=日本橋でんでんタウン"},{label:"📍 Design Pocket",url:"https://www.google.com/maps/search/?api=1&query=デザインポケット+大阪"},{label:"📍 玉製家",url:"https://www.google.com/maps/search/?api=1&query=玉製家+大阪"}]},
+   {t:"13:30",icon:"🎌",name:"梅田 / 電器街",short:"電器街",p:[780,590],travel:10,mode:"步行",note:"DIY 食物模型 Design Pocket\n紅豆麻糬 玉製家和菓子\n— Ota Road 逛法：先走東側由北往南 ①→⑥，到 Mandarake 過馬路，再沿西側由南往北 ⑦→⑨，不用來回穿越",maps:[{label:"📍 Design Pocket",url:"https://www.google.com/maps/search/?api=1&query=デザインポケット+大阪"},{label:"📍 玉製家",url:"https://www.google.com/maps/search/?api=1&query=玉製家+大阪"},{label:"【東側・往南】① Gacha-gacha no Mori",url:"https://maps.app.goo.gl/oRCNZavdHZ8Uz4E68"},{label:"② Jungle Mecha Store",url:"https://maps.app.goo.gl/s8mKV9xQnycqAZSa6"},{label:"③ Jungle",url:"https://maps.app.goo.gl/XrYSoagxBcDEdrWw7"},{label:"④ Guf Nipponbashi",url:"https://maps.app.goo.gl/hzVyqhrHD5tj3uUE9"},{label:"⑤ VOLKS Showroom",url:"https://maps.app.goo.gl/QqAVs3s6bHkyWpVj9"},{label:"⑥ Mandarake",url:"https://maps.app.goo.gl/WSoTnbyid8dzrx8C8"},{label:"【過馬路→西側・往北】⑦ Lashinbang 2号店",url:"https://maps.app.goo.gl/Lqu6niwaCHVBA62x9"},{label:"⑧ Animate 日本橋店",url:"https://maps.app.goo.gl/S1VwWNP3XW4G7vJL7"},{label:"⑨ SURUGA-YA Ota-Road",url:"https://maps.app.goo.gl/QkbkhPQW3Rdz22ix8"}]},
    {t:"15:30",icon:"🎰",name:"柏青哥",short:"柏青哥",p:[520,600],travel:15,mode:"步行",cost:5000,map:"https://maps.app.goo.gl/Zd9k6ikHEtFcakMp8"},
    {t:"19:30",icon:"🍲",name:"晚餐：しゃぶ長 Shabucho",short:"しゃぶ長",p:[230,480],travel:12,mode:"步行",cost:8000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/B7NkBYnBeFqQQ1nc7"}
   ]},
@@ -700,7 +701,7 @@ function renderList(d){
       <div class="name"><span aria-hidden="true">${s.icon}</span><span>${s.name}</span></div>
       ${sub?`<div class="sub">${sub}</div>`:""}
       ${s.note?`<div class="note">${s.note}</div>`:""}${tags}
-      ${s.maps?`<div class="links">${s.maps.map(m=>`<a href="${m.url}" target="_blank" rel="noopener">${m.label}</a>`).join(" ")}</div>`:s.map?`<div class="links"><a href="${s.map}" target="_blank" rel="noopener">📍 Google 地圖</a></div>`:""}
+      ${s.maps?`<div class="links${s.maps.length>3?" stack":""}">${s.maps.map(m=>`<a href="${m.url}" target="_blank" rel="noopener">${m.label}</a>`).join(" ")}</div>`:s.map?`<div class="links"><a href="${s.map}" target="_blank" rel="noopener">📍 Google 地圖</a></div>`:""}
     </div></div>`;
     const card=li.querySelector(".card");
     const go=e=>{if(e.target.closest("a"))return;setLive(false);pause();cur=s.m;update()};
