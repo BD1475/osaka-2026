@@ -122,7 +122,7 @@ ol.stops::before{content:"";position:absolute;left:60px;top:12px;bottom:12px;bor
 .stop.now .card .note,.stop.now .card .sub{color:#4A3A2A}
 .card .name{font-size:16px;font-weight:700;display:flex;gap:8px;align-items:flex-start}
 .card .sub{font-size:13px;color:var(--ink2);margin-top:2px}
-.card .note{font-size:13px;color:var(--ink2);margin-top:4px}
+.card .note{font-size:13px;color:var(--ink2);margin-top:4px;white-space:pre-line}
 .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;margin:5px 4px 0 0;border:1.5px solid var(--ink);background:var(--blob1)}
 .tag.hot{background:var(--red);color:#fff;border-color:var(--ink)}
 .links{margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
@@ -511,50 +511,50 @@ const SCENES=[
 const DAYS=[
  {date:"2026-10-29",wd:"四",title:"抵達、心齋橋・道頓堀逛街",area:"關西機場 → 難波",total:10000,
   stops:[
-   {t:"11:30",icon:"✈️",name:"抵達關西機場 (KIX)",short:"關西機場",p:[165,548],dur:"1 hr"},
+   {t:"11:30",icon:"✈️",name:"抵達關西機場 (KIX)",short:"關西機場",p:[165,548],dur:"1 hr",map:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport"},
    {t:"12:30",icon:"🚐",name:"包車到難波",short:"包車出發",mode:"車車",dur:"40 min"},
    {t:"13:30",icon:"🏨",name:"飯店 Check-in、放行李",short:"飯店",p:[540,460],travel:50,mode:"包車",dur:"30 min",km:36},
    {t:"14:00",icon:"🥞",name:"午餐：味乃家御好燒",sub:"Namba Okonomiyaki Ajinoya Honten",short:"味乃家",p:[700,430],travel:10,mode:"步行",dur:"1 hr",cost:2000,map:"https://maps.app.goo.gl/G7ijfDMQeRoEzyUq8"},
    {t:"14:30",icon:"🛍️",name:"心齋橋筋商店街",short:"心齋橋筋",p:[560,190],travel:15,mode:"步行",dur:"3 hr",tags:[{t:"重要‼️ Sanrio House / Sanrio Gift Shop",hot:true}]},
-   {t:"19:30",icon:"🥩",name:"晚餐：燒肉 Kurumi 心齋橋本店",sub:"Yakiniku Kurumi Shinsaibashi Main Store",short:"燒肉 Kurumi",p:[790,250],travel:10,mode:"步行",dur:"1.5 hr",cost:8000,tags:[{t:"訂好位"}]},
-   {t:"20:00",icon:"🧳",name:"逛街",short:"逛街",p:[360,260],travel:8,mode:"步行",dur:"1 hr",note:"藥妝：Sugi Drug・行李箱：M coin’s 心斎橋本店"}
+   {t:"19:30",icon:"🥩",name:"晚餐：燒肉 Kurumi 心齋橋本店",sub:"Yakiniku Kurumi Shinsaibashi Main Store",short:"燒肉 Kurumi",p:[790,250],travel:10,mode:"步行",dur:"1.5 hr",cost:8000,tags:[{t:"訂好位"}],map:"https://maps.app.goo.gl/51nMcABZjjw2A5qx6"},
+   {t:"20:00",icon:"🧳",name:"逛街",short:"逛街",p:[360,260],travel:8,mode:"步行",dur:"1 hr",note:"藥妝：Sugi Drug\n行李箱：M coin’s 心斎橋本店",maps:[{label:"📍 Sugi Drug 地圖",url:"https://www.google.com/maps/search/?api=1&query=Sugi+Drug+Shinsaibashi"},{label:"📍 M coin’s 地圖",url:"https://www.google.com/maps/search/?api=1&query=M+coin%27s+心斎橋本店"}]}
   ]},
  {date:"2026-10-30",wd:"五",title:"梅田 / 環球影城（分組行動）",area:"梅田 / 環球影城",total:7000,
   teams:[{id:"A",name:"🎢 USJ 組",pals:[0,1,2]},{id:"B",name:"🛍️ 梅田組",pals:[3,4,5]}],
   stops:[
    {t:"07:00",icon:"🏨",name:"飯店出發",short:"飯店",p:[640,560]},
-   {t:"07:30",team:"A",icon:"🎢",name:"出發前往 USJ",short:"USJ",p:[300,410],travel:30,mode:"JR 環狀線 → 櫻島線",km:10,note:"一整天午餐晚餐園區"},
-   {t:"10:00",team:"B",icon:"🛍️",name:"梅田逛街",short:"梅田",p:[640,180],travel:35,mode:"電車",km:6,note:"KITH 大阪・LUCUA（FREAK’S STORE 7F、URBAN RESEARCH 7F、BEAMS UMEDA 3F、STUDIOUS MENS 7F）・HEP FIVE（Aland 2F、BEAMS STREET 1F、Stussy 5F、HARE 5F、RAGEBLUE 5F）・LOFTMAN COOP UMEDA"},
+   {t:"07:30",team:"A",icon:"🎢",name:"出發前往 USJ",short:"USJ",p:[300,410],travel:30,mode:"JR 環狀線 → 櫻島線",km:10,note:"一整天午餐晚餐園區",map:"https://www.google.com/maps/search/?api=1&query=Universal+Studios+Japan"},
+   {t:"10:00",team:"B",icon:"🛍️",name:"梅田逛街",short:"梅田",p:[640,180],travel:35,mode:"電車",km:6,note:"KITH 大阪\nLUCUA\n　・BEAMS UMEDA 3F\n　・FREAK’S STORE 7F\n　・URBAN RESEARCH 7F\n　・STUDIOUS MENS 7F\nHEP FIVE\n　・BEAMS STREET 1F\n　・Aland 2F\n　・Stussy 5F\n　・HARE 5F\n　・RAGEBLUE 5F\nLOFTMAN COOP UMEDA",maps:[{label:"📍 KITH 大阪",url:"https://www.google.com/maps/search/?api=1&query=KITH+Osaka"},{label:"📍 LUCUA",url:"https://www.google.com/maps/search/?api=1&query=LUCUA+Osaka"},{label:"📍 HEP FIVE",url:"https://www.google.com/maps/search/?api=1&query=HEP+FIVE"},{label:"📍 LOFTMAN COOP UMEDA",url:"https://www.google.com/maps/search/?api=1&query=LOFTMAN+COOP+UMEDA"}]},
    {t:"12:00",team:"B",icon:"🍣",name:"午餐：大阪泉佐野港 活鮨",sub:"Osaka Izumisano Port Katsu Sushi",short:"活鮨",p:[830,230],travel:10,mode:"步行",cost:3000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/iz4F4WonJfeJGte38"},
    {t:"18:30",team:"B",icon:"🔥",name:"晚餐：力丸 炉ばた焼 漁火",sub:"Isaribi",short:"漁火",p:[760,360],travel:12,mode:"步行",cost:4000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/39BdEuRRstzjNRVB9"}
   ]},
  {date:"2026-10-31",wd:"六",title:"逛街",area:"難波 / 電器街",total:15000,
   stops:[
    {t:"08:30",icon:"🏨",name:"飯店出發",short:"飯店",p:[530,420]},
-   {t:"09:00",icon:"🐧",name:"唐吉訶德",short:"唐吉訶德",p:[300,330],travel:10,mode:"步行"},
+   {t:"09:00",icon:"🐧",name:"唐吉訶德",short:"唐吉訶德",p:[300,330],travel:10,mode:"步行",map:"https://maps.app.goo.gl/autfdXTrHsR8SfSD7"},
    {t:"12:00",icon:"🍜",name:"午餐：Nishiya 烏龍麵",short:"Nishiya",p:[560,130],travel:15,mode:"步行",cost:2000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/QAAib3xZiaHQgjHQ7"},
-   {t:"12:30",icon:"🦀",name:"黒門市場",short:"黒門市場",p:[780,370],travel:15,mode:"步行"},
-   {t:"13:30",icon:"🎌",name:"梅田 / 電器街",short:"電器街",p:[780,590],travel:10,mode:"步行",note:"DIY 食物模型 Design Pocket・紅豆麻糬 玉製家和菓子"},
-   {t:"15:30",icon:"🎰",name:"柏青哥",short:"柏青哥",p:[520,600],travel:15,mode:"步行",cost:5000},
-   {t:"19:30",icon:"🍲",name:"晚餐：しゃぶ長 Shabucho",short:"しゃぶ長",p:[230,480],travel:12,mode:"步行",cost:8000,tags:[{t:"已訂位"}]}
+   {t:"12:30",icon:"🦀",name:"黒門市場",short:"黒門市場",p:[780,370],travel:15,mode:"步行",map:"https://www.google.com/maps/search/?api=1&query=黒門市場"},
+   {t:"13:30",icon:"🎌",name:"梅田 / 電器街",short:"電器街",p:[780,590],travel:10,mode:"步行",note:"DIY 食物模型 Design Pocket\n紅豆麻糬 玉製家和菓子",maps:[{label:"📍 電器街",url:"https://www.google.com/maps/search/?api=1&query=日本橋でんでんタウン"},{label:"📍 Design Pocket",url:"https://www.google.com/maps/search/?api=1&query=デザインポケット+大阪"},{label:"📍 玉製家",url:"https://www.google.com/maps/search/?api=1&query=玉製家+大阪"}]},
+   {t:"15:30",icon:"🎰",name:"柏青哥",short:"柏青哥",p:[520,600],travel:15,mode:"步行",cost:5000,map:"https://maps.app.goo.gl/Zd9k6ikHEtFcakMp8"},
+   {t:"19:30",icon:"🍲",name:"晚餐：しゃぶ長 Shabucho",short:"しゃぶ長",p:[230,480],travel:12,mode:"步行",cost:8000,tags:[{t:"已訂位"}],map:"https://maps.app.goo.gl/B7NkBYnBeFqQQ1nc7"}
   ]},
  {date:"2026-11-01",wd:"日",title:"神戶",area:"神戶 → 通天閣",total:13000,
   stops:[
    {t:"08:00",icon:"🏨",name:"飯店出發",short:"飯店",p:[850,420]},
-   {t:"09:00",icon:"⛩️",name:"生田神社",short:"生田神社",p:[130,300],travel:55,mode:"電車",km:32},
+   {t:"09:00",icon:"⛩️",name:"生田神社",short:"生田神社",p:[130,300],travel:55,mode:"電車",km:32,map:"https://www.google.com/maps/search/?api=1&query=生田神社"},
    {t:"11:30",icon:"🐂",name:"午餐：神戶牛 Kobe Beef Steak Ishida.",sub:"生田新道店 / 本店",short:"神戶牛 Ishida",p:[330,220],travel:10,mode:"步行",cost:10000,note:"本店 3 人 / 分店 6 人",maps:[{label:"📍 本店 地圖",url:"https://maps.app.goo.gl/R9PqqTCzFkKYihdW7"},{label:"📍 生田新道店 地圖",url:"https://maps.app.goo.gl/4Kpe8erkdVPu8nEm7"}]},
    {t:"13:00",icon:"🛍️",name:"神戶三宮中心街",sub:"Sannomiya Center Gai Shopping Street",short:"三宮中心街",p:[380,370],travel:10,mode:"步行",note:"逛街",map:"https://maps.app.goo.gl/N5szNKHHGT5mdeq79"},
    {t:"14:30",icon:"☕",name:"沒行程",short:"自由時間"},
-   {t:"17:00",icon:"🍣",name:"晚餐：すし酒場 さしす",sub:"Sushi Sakaba Sashisu",short:"さしす",p:[170,420],travel:12,mode:"步行",cost:3000,note:"不要吃太飽，等等吃炸串"},
-   {t:"18:30",icon:"🍢",name:"通天閣吃炸串（特別完美）",short:"通天閣",p:[780,560],travel:55,mode:"電車",km:30}
+   {t:"17:00",icon:"🍣",name:"晚餐：すし酒場 さしす",sub:"Sushi Sakaba Sashisu",short:"さしす",p:[170,420],travel:12,mode:"步行",cost:3000,note:"不要吃太飽，等等吃炸串",map:"https://maps.app.goo.gl/nWpBT241AyJBDZ596"},
+   {t:"18:30",icon:"🍢",name:"通天閣吃炸串（特別完美）",short:"通天閣",p:[780,560],travel:55,mode:"電車",km:30,map:"https://www.google.com/maps/search/?api=1&query=通天閣"}
   ]},
  {date:"2026-11-02",wd:"一",title:"伏見稻荷、清水寺",area:"京都",total:3000,
   stops:[
    {t:"09:00",icon:"🚐",name:"出發前往京都",short:"飯店出發",p:[120,600],mode:"包車",dur:"1 hr"},
-   {t:"10:00",icon:"🏯",name:"清水寺、二年坂・三年坂",short:"清水寺",p:[860,250],travel:55,mode:"包車",dur:"2 hr",km:50},
-   {t:"12:00",icon:"💰",name:"御金神社",short:"御金神社",p:[520,130],travel:20,mode:"包車",dur:"0.5 hr",note:"自備台幣鈔票洗錢、衛生紙擦乾"},
-   {t:"13:00",icon:"🍡",name:"午餐：錦市場 走走吃吃",short:"錦市場",p:[650,230],travel:15,mode:"包車",dur:"2 hr",cost:3000},
-   {t:"15:00",icon:"⛩️",name:"伏見稻荷大社 千本鳥居",short:"伏見稻荷",p:[720,460],travel:25,mode:"包車",dur:"2 hr"},
+   {t:"10:00",icon:"🏯",name:"清水寺、二年坂・三年坂",short:"清水寺",p:[860,250],travel:55,mode:"包車",dur:"2 hr",km:50,map:"https://www.google.com/maps/search/?api=1&query=清水寺"},
+   {t:"12:00",icon:"💰",name:"御金神社",short:"御金神社",p:[520,130],travel:20,mode:"包車",dur:"0.5 hr",note:"自備台幣鈔票洗錢、衛生紙擦乾",map:"https://www.google.com/maps/search/?api=1&query=御金神社"},
+   {t:"13:00",icon:"🍡",name:"午餐：錦市場 走走吃吃",short:"錦市場",p:[650,230],travel:15,mode:"包車",dur:"2 hr",cost:3000,map:"https://www.google.com/maps/search/?api=1&query=錦市場"},
+   {t:"15:00",icon:"⛩️",name:"伏見稻荷大社 千本鳥居",short:"伏見稻荷",p:[720,460],travel:25,mode:"包車",dur:"2 hr",map:"https://www.google.com/maps/search/?api=1&query=伏見稲荷大社"},
    {t:"17:00",icon:"🚐",name:"返回大阪",short:"返回大阪",mode:"包車",dur:"1 hr"},
    {t:"18:30",icon:"🍽️",name:"晚餐：（待定）",short:"晚餐",p:[330,610],travel:75,mode:"包車",dur:"1 hr",km:45}
   ],
@@ -563,9 +563,9 @@ const DAYS=[
   teams:[{id:"A",name:"✈️ 直接機場組（5 人）",pals:[0,1,2]},{id:"B",name:"🦀 蟹道樂組",pals:[3,4,5]}],
   stops:[
    {t:"10:00",icon:"🏨",name:"飯店 Check-out",short:"Check-out",p:[640,190]},
-   {t:"10:30",team:"A",icon:"✈️",name:"直接前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,km:50,note:"Check-out 後直接出發"},
+   {t:"10:30",team:"A",icon:"✈️",name:"直接前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,km:50,note:"Check-out 後直接出發",map:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport"},
    {t:"12:00",team:"B",icon:"🦀",name:"午餐：蟹道樂 道頓堀東店",sub:"Kani Doraku Dotonbori East",short:"蟹道樂",p:[820,330],travel:10,mode:"步行",cost:10000,map:"https://maps.app.goo.gl/794bmZbScFL63hdPA"},
-   {t:"16:00",team:"B",icon:"✈️",name:"前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,mode:"包車",km:50}
+   {t:"16:00",team:"B",icon:"✈️",name:"前往關西機場、退稅、登機",short:"關西機場",p:[195,540],travel:55,mode:"包車",km:50,map:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport"}
   ]}
 ];
 
